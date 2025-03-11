@@ -5,9 +5,8 @@ import { Poppins } from "next/font/google";
 import { ThemeProvider } from "@/app/_providers/provider";
 import { PostHogProvider } from "./_providers/posthog-provider";
 import { QueryProvider } from "./_providers/query-provider";
-import { Toaster } from "@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "sonner";
-
+import { Analytics } from "@vercel/analytics/react"
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "400", "500", "600", "700"],
@@ -98,17 +97,19 @@ export default function RootLayout({
         />
       </head>
       <body className={`${poppins.className} antialiased`}>
+        <Analytics />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
+
           <QueryProvider>
             <Appbar />
             <PostHogProvider>
               {children}
-    
+
               <SonnerToaster />
             </PostHogProvider>
           </QueryProvider>
