@@ -1,5 +1,4 @@
 'use client'
-
 import Image from "next/image"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
@@ -9,8 +8,10 @@ import { useState } from "react"
 import axios from "axios"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
+import { useSession } from "@/lib/auth-client"
 
 const Hero = () => {
+  const { data: session } = useSession()
   const router = useRouter()
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -34,7 +35,11 @@ const Hero = () => {
             source AI chat app that puts your creativity and imagination first.
           </p>
           <Button onClick={() => {
-            router.push("/login")
+            if (!session) {
+              router.push("/login");
+            } else {
+              router.push("/dashboard");
+            }
           }} className="bg-red-500 hover:bg-red-600 text-white shadow-lg dark:shadow-red-500/50">
             Get Started
           </Button>
