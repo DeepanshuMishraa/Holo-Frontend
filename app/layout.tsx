@@ -97,13 +97,15 @@ export default function RootLayout({
         />
       </head>
       <body className={`${poppins.className} antialiased`}>
-        <Analytics />
+
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
+
+          <Analytics />
 
           <QueryProvider>
             <Appbar />
