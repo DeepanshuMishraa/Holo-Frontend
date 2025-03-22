@@ -17,11 +17,16 @@ export default function Home() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ token }),
+        credentials: 'include'
       })
 
-      if (response.ok) {
+      const data = await response.json()
+
+      if (data.verified) {
         setVerified(true)
-        router.push('/login')
+        setTimeout(() => {
+          router.push('/login')
+        }, 500)
       }
     } catch (error) {
       console.error('Verification failed:', error)
@@ -34,7 +39,7 @@ export default function Home() {
         <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 bg-background/80 backdrop-blur-sm p-8 rounded-lg shadow-lg">
           <div className="flex flex-col items-center gap-4">
             <p className="text-center text-muted-foreground">
-              Please verify that you are human 
+              Please verify that you are human
             </p>
             <TurnstileWidget onVerify={handleVerify} />
           </div>
