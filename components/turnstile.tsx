@@ -10,7 +10,7 @@ export function TurnstileWidget({ onVerify }: { onVerify: (token: string) => voi
       onSuccess={onVerify}
       options={{
         theme: 'light',
-        appearance: 'interactive'
+        appearance: 'always'
       }}
     />
   )
